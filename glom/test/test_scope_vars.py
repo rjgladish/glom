@@ -1,8 +1,8 @@
 import pytest
 
-from glom import glom, Path, S, A, T, Vars, Val, GlomError, M, SKIP, Let
+from glom import glom, Path, S, A, T, Vars, Val, GlomError, M, SKIP
 
-from glom.core import ROOT
+from glom.core import ROOT, Let
 from glom.mutation import PathAssignError
 
 def test_s_scope_assign():
@@ -80,7 +80,7 @@ def test_max_skip():
     assert result.max == 9
 
 
-def test_let():  # backwards compat 2020-07
+def test_let():  # Let is no longer a public export, but still in glom.core
     data = {'a': 1, 'b': [{'c': 2}, {'c': 3}]}
     output = [{'a': 1, 'c': 2}, {'a': 1, 'c': 3}]
     assert glom(data, (Let(a='a'), ('b', [{'a': S['a'], 'c': 'c'}]))) == output

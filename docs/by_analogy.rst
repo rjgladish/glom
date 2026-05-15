@@ -64,7 +64,7 @@ restructuring it while fetching and transforming values, which GraphQL
 only minimally supports, and SQL barely supports at all. Table targets
 get you table outputs.
 
-Similiarity to validation (jsonschema, schema, cerberus)
+Similarity to validation (jsonschema, schema, cerberus)
 --------------------------------------------------------
 
 ``glom`` is a generalized form of intake libraries `including validation`_.
@@ -87,8 +87,8 @@ Similarity to jq
 to jq_, except it uses Python as its query language, instead of making
 its own. Most importantly glom gives you `a programmatic way forward`_.
 
-.. _jq: https://stedolan.github.io/jq/
-.. _a programmatic way forward: http://sedimental.org/glom_restructured_data.html#library-first-then-cli
+.. _jq: https://jqlang.github.io/jq/
+.. _a programmatic way forward: https://sedimental.org/glom_restructured_data.html#library-first-then-cli
 
 Similarity to XPath/XSLT
 ------------------------
@@ -106,7 +106,7 @@ features exist in glom's ballpark, including:
 
 * `Specter (for Clojure) <https://github.com/nathanmarz/specter>`_
 * `Lenses (for Haskell) <https://hackage.haskell.org/package/lens>`_
-* `Dig (for Ruby Hashmaps) <https://ruby-doc.org/core-2.3.0_preview1/Hash.html#dig>`_
+* `Dig (for Ruby Hashmaps) <https://ruby-doc.org/3.3.6/Hash.html#method-i-dig>`_
 
 If you know of other useful comparisons, `let us know
 <https://github.com/mahmoud/glom/issues/new>`_!

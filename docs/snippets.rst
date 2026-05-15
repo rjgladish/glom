@@ -25,6 +25,8 @@ basic Python builtins, the second uses the :data:`~glom.T` object.
     glom([1, 2, 3], (reversed, list))
     glom([1, 2, 3], T[::-1])
 
+`Try it in glompad <https://yak.party/glompad/#spec=T%5B%3A%3A-1%5D&target=%5B1%2C+2%2C+3%5D&v=1>`__
+
 
 Iteration Result as Tuple
 -------------------------
@@ -37,6 +39,8 @@ absolute-valued integers:
 .. code-block:: python
 
     glom([-1, 2, -3], ([abs], tuple))
+
+`Try it in glompad <https://yak.party/glompad/#spec=%28%5Babs%5D%2C+tuple%29&target=%5B-1%2C+2%2C+-3%5D&v=1>`__
 
 
 Data-Driven Assignment
@@ -95,6 +99,8 @@ to filter the odd numbers from a list.
 
     glom([1, 2, 3, 4, 5, 6], lambda t: [i for i in t if i % 2])
     glom([1, 2, 3, 4, 5, 6], [lambda i: i if i % 2 else SKIP])
+
+`Try it in glompad <https://yak.party/glompad/#spec=%5Blambda+i%3A+i+if+i+%25+2+else+SKIP%5D&target=%5B1%2C+2%2C+3%2C+4%2C+5%2C+6%5D&v=1>`__
 
 
 The second approach demonstrates the use of ``glom.SKIP`` to
@@ -156,8 +162,8 @@ iteration using the following :meth:`~glom.register` technique:
 Call this in ``settings`` or somewhere similarly early in your
 application setup for the best results.
 
-.. _Managers: https://docs.djangoproject.com/en/2.0/topics/db/managers/
-.. _QuerySets: https://docs.djangoproject.com/en/2.0/ref/models/querysets/
+.. _Managers: https://docs.djangoproject.com/en/stable/topics/db/managers/
+.. _QuerySets: https://docs.djangoproject.com/en/stable/ref/models/querysets/
 
 
 Filter Iterable
@@ -171,6 +177,8 @@ An iteration specifier can filter items out by using
 
     glom(['cat', 1, 'dog', 2], [Check(type=str, default=SKIP)])
     # ['cat', 'dog']
+
+`Try it in glompad <https://yak.party/glompad/#spec=%5BCheck%28type%3Dstr%2C+default%3DSKIP%29%5D&target=%5B%22cat%22%2C+1%2C+%22dog%22%2C+2%5D&v=1>`__
 
 You can also truncate the list at the first failing check by using
 :data:`~glom.STOP`.
@@ -204,7 +212,7 @@ As an example, here is a lisp-style If expression custom spec type:
     # {'no': 0}
 
 
-Parellel Evaluation of Sub-Specs
+Parallel Evaluation of Sub-Specs
 --------------------------------
 
 This is another example of a simple glom extension.
@@ -246,6 +254,8 @@ simply:
 
     glom(range(10), [(M < 7) | Val(7)])
     # [0, 1, 2, 3, 4, 5, 6, 7, 7, 7]
+
+`Try it in glompad <https://yak.party/glompad/#spec=%5B%28M+%3C+7%29+%7C+Val%287%29%5D&target=%5B0%2C+1%2C+2%2C+3%2C+4%2C+5%2C+6%2C+7%2C+8%2C+9%5D&v=1>`__
 
 
 What if you want to drop rather than clamp out-of-range values?
@@ -328,13 +338,10 @@ such that all unicodes are converted to native strings.
 
 * on :class:`dict`, use :class:`~glom.Ref()` to recurse for all keys and values
 * on :class:`list`, use :class:`~glom.Ref()` to recurse on each item
-* on text objects (``type(u'')``) -- py3 :class:`str` or py2
-  :class:`unicode` -- transform the target with :class:`str`
-* for all other values (``object``), pass them through
+* on text objects (``type(u'')``), transform the target with :class:`str`
 
 As motivation for why this might come up: attributes, class names,
-function names, and identifiers must be the native string type for a
-given Python, i.e., bytestrings in Python 2 and unicode in Python 3.
+function names, and identifiers must be :class:`str` in Python 3.
 
 
 Store and Retrieve Current Target
@@ -352,6 +359,8 @@ For example, we could use this to update a ``dict``:
 .. code-block:: python
 
     glom({}, (A.t, T.update({1: 1}), S.t))
+
+`Try it in glompad <https://yak.party/glompad/#spec=%28A.t%2C+T.update%28%7B1%3A+1%7D%29%2C+S.t%29&target=%7B%7D&v=1>`__
 
 
 Accessing Ancestry
@@ -388,7 +397,7 @@ You can play with glom scopes `in your browser here`__.
 
 .. _Scopes: https://glom.readthedocs.io/en/latest/api.html#updating-the-scope-s-a
 
-Note that at the time of writing, glom doesn't yet have full tree traversal, so the nesting of 
+Note that glom doesn't have full tree traversal, so the nesting of 
 the spec is going to roughly match the nesting of your data. If you need this to work in an 
 arbitrarily nested structure, we recommend `remap <https://sedimental.org/remap.html>`_, 
 the recursive map function.

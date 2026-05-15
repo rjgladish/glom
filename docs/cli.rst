@@ -11,7 +11,7 @@ All the power of ``glom``, without even opening your text editor!
 .. code-block:: text
 
    $ glom --help
-   Usage: /home/mahmoud/bin/glom [FLAGS] [spec [target]]
+   Usage: glom [FLAGS] [spec [target]]
 
    Command-line interface to the glom library, providing nested data
    access and data restructuring with the power of Python.

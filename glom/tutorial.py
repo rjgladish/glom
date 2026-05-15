@@ -4,9 +4,8 @@
 
    glom's tutorial is a runnable module, feel free to run ``pip
    install glom`` and ``from glom.tutorial import *`` in the Python
-   REPL to glom along. Or `try it in your browser here
-   <https://repl.it/@mhashemi/glom-planetary-templating>`_ or in the
-   embedded REPLs below!
+   REPL to glom along. Or `try it in your browser with glompad
+   <https://yak.party/glompad/>`_!
 
 Dealing with Data
 =================
@@ -53,6 +52,8 @@ on this simple construct::
   >>> glom(data, 'a.b.c')
   'd'
 
+`Try this in glompad <https://yak.party/glompad/#spec=%22a.b.c%22&target=%7B%22a%22%3A+%7B%22b%22%3A+%7B%22c%22%3A+%22d%22%7D%7D%7D&v=1>`__
+
 Well that's short, and reads fine, but what about in the error case?
 
   >>> glom(data2, 'a.b.c')
@@ -70,9 +71,7 @@ give us an error message we can read, understand, and act upon.
 Interactive Deep Get
 --------------------
 
-.. raw:: html
-
-   <iframe height="400px" width="100%" src="https://repl.it/@mhashemi/glom-basic-deep-get?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+`Try the deep-get example in glompad <https://yak.party/glompad/#spec=%22a.b.c%22&target=%7B%22a%22%3A+%7B%22b%22%3A+%7B%22c%22%3A+%22d%22%7D%7D%7D&v=1>`__
 
 
 And would you believe this "deep access" example doesn't even scratch
@@ -115,13 +114,15 @@ Let's restructure the data to make a list of names:
   >>> glom(target, ('system.planets', ['name']))
   ['earth', 'jupiter']
 
+`Try this in glompad <https://yak.party/glompad/#spec=%28%22system.planets%22%2C+%5B%22name%22%5D%29&target=%7B%22system%22%3A+%7B%22planets%22%3A+%5B%7B%22name%22%3A+%22earth%22%7D%2C+%7B%22name%22%3A+%22jupiter%22%7D%5D%7D%7D&v=1>`__
+
 And let's say we want to capture a parallel list of moon counts with the names as well:
 
   >>> target = {
   ...     'system': {
   ...         'planets': [
   ...             {'name': 'earth', 'moons': 1},
-  ...             {'name': 'jupiter', 'moons': 69}
+  ...             {'name': 'jupiter', 'moons': 95}
   ...         ]
   ...     }
   ... }
@@ -130,7 +131,9 @@ And let's say we want to capture a parallel list of moon counts with the names a
   ...     'moons': ('system.planets', ['moons'])
   ... }
   >>> pprint(glom(target, spec))
-  {'moons': [1, 69], 'names': ['earth', 'jupiter']}
+  {'moons': [1, 95], 'names': ['earth', 'jupiter']}
+
+`Try this in glompad <https://yak.party/glompad/#spec=%7B%22names%22%3A+%28%22system.planets%22%2C+%5B%22name%22%5D%29%2C+%22moons%22%3A+%28%22system.planets%22%2C+%5B%22moons%22%5D%29%7D&target=%7B%22system%22%3A+%7B%22planets%22%3A+%5B%7B%22name%22%3A+%22earth%22%2C+%22moons%22%3A+1%7D%2C+%7B%22name%22%3A+%22jupiter%22%2C+%22moons%22%3A+95%7D%5D%7D%7D&v=1>`__
 
 We can react to changing data requirements as fast as the data itself can change, naturally restructuring our results,
 despite the input's nested nature. Like a list comprehension, but for nested data, our code mirrors our output.
@@ -193,7 +196,7 @@ To handle this, we can define the ``dwarf_planets`` subspec as a Coalesce fallba
   ...     'system': {
   ...         'planets': [
   ...             {'name': 'earth', 'moons': 1},
-  ...             {'name': 'jupiter', 'moons': 69}
+  ...             {'name': 'jupiter', 'moons': 95}
   ...         ]
   ...     }
   ... }
@@ -202,7 +205,7 @@ To handle this, we can define the ``dwarf_planets`` subspec as a Coalesce fallba
   ...     'moons': (Coalesce('system.planets', 'system.dwarf_planets'), ['moons'])
   ... }
   >>> pprint(glom(target, spec))
-  {'moons': [1, 69], 'planets': ['earth', 'jupiter']}
+  {'moons': [1, 95], 'planets': ['earth', 'jupiter']}
 
 You can see here we get the expected results, but say our target changes...
 
@@ -230,7 +233,7 @@ It extracts the moon count from a dictionary that has the planet names as a key.
 
   >>> from glom import glom, T, Merge, Iter, Coalesce
   >>> target = {
-  ...    "pluto": {"moons": 6, "population": None},
+  ...    "pluto": {"moons": 5, "population": None},
   ...    "venus": {"population": {"aliens": 5}},
   ...    "earth": {"moons": 1, "population": {"humans": 7700000000, "aliens": 1}},
   ... }
@@ -242,7 +245,7 @@ It extracts the moon count from a dictionary that has the planet names as a key.
   ...     )
   ... }
   >>> pprint(glom(target, spec))
-  {'moons': {'earth': 1, 'pluto': 6, 'venus': 0}}
+  {'moons': {'earth': 1, 'pluto': 5, 'venus': 0}}
 
 Don't worry if you do not fully understand how this works at this
 point. If you would like to learn more, look up :class:`~glom.Iter()`,
@@ -260,12 +263,14 @@ Going back to our example, let's say we wanted to get an aggregate moon count:
   ...     'system': {
   ...         'planets': [
   ...             {'name': 'earth', 'moons': 1},
-  ...             {'name': 'jupiter', 'moons': 69}
+  ...             {'name': 'jupiter', 'moons': 95}
   ...         ]
   ...     }
   ... }
   >>> pprint(glom(target, {'moon_count': ('system.planets', ['moons'], sum)}))
-  {'moon_count': 70}
+  {'moon_count': 96}
+
+`Try this in glompad <https://yak.party/glompad/#spec=%7B%22moon_count%22%3A+%28%22system.planets%22%2C+%5B%22moons%22%5D%2C+sum%29%7D&target=%7B%22system%22%3A+%7B%22planets%22%3A+%5B%7B%22name%22%3A+%22earth%22%2C+%22moons%22%3A+1%7D%2C+%7B%22name%22%3A+%22jupiter%22%2C+%22moons%22%3A+95%7D%5D%7D%7D&v=1>`__
 
 With glom, you have full access to Python at any given moment.
 Pass values to functions, whether built-in, imported, or defined inline with lambda.
@@ -273,10 +278,7 @@ Pass values to functions, whether built-in, imported, or defined inline with lam
 Interactive Planetary Templating
 --------------------------------
 
-.. raw:: html
-
-   <iframe height="400px" width="100%" src="https://repl.it/@mhashemi/glom-planetary-templating?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-
+`Try this example in glompad <https://yak.party/glompad/#spec=%7B%22moon_count%22%3A+%28%22system.planets%22%2C+%5B%22moons%22%5D%2C+sum%29%7D&target=%7B%22system%22%3A+%7B%22planets%22%3A+%5B%7B%22name%22%3A+%22earth%22%2C+%22moons%22%3A+1%7D%2C+%7B%22name%22%3A+%22jupiter%22%2C+%22moons%22%3A+95%7D%5D%7D%7D&v=1>`__
 
 Practical Production Use
 ========================
@@ -414,9 +416,8 @@ https://github.com/mahmoud/glom/stargazers
 Interactive Contact Management
 ------------------------------
 
-.. raw:: html
-
-   <iframe height="400px" width="100%" src="https://repl.it/@mhashemi/glom-point-of-contact?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+You can experiment with glom specs interactively using `glompad <https://yak.party/glompad/>`__.
+Paste the contact spec above and try modifying it.
 
 Conclusion
 ==========

@@ -8,7 +8,6 @@ from glom.core import (glom,
                        Invoke,
                        Spec,
                        Ref,
-                       OMIT,  # backwards compat
                        SKIP,
                        STOP,
                        UP,
@@ -17,8 +16,6 @@ from glom.core import (glom,
                        Path,
                        Vars,
                        Val,
-                       Literal,  # backwards compat 2020-07
-                       Let,  # backwards compat 2020-07
                        Coalesce,
                        Inspect,
                        Pipe,

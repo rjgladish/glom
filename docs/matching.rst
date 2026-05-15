@@ -25,7 +25,7 @@ extend an example above to allow additional keys and values in the
 user dict above we could add :class:`object` as a generic pass through::
 
   >>> target = [{'id': 1, 'email': 'alice@example.com', 'extra': 'val'}]
-  >>> spec = Match([{'id': int, 'email': str, object: object}]))
+  >>> spec = Match([{'id': int, 'email': str, object: object}])
   >>> assert glom(target, spec) == \\
       ... [{'id': 1, 'email': 'alice@example.com', 'extra': 'val'}]
   True
@@ -36,8 +36,8 @@ the subtlety in :class:`~glom.Match` dictionary evaluation.
 By default, value match keys are required, and other keys are
 optional.  For example, ``'id'`` and ``'email'`` above are required
 because they are matched via ``==``.  If either was not present, it
-would raise class:`~glom.MatchError`.  class:`object` however is matched
-with func:`isinstance()`. Since it is not an value-match comparison,
+would raise :class:`~glom.MatchError`.  :class:`object` however is matched
+with :func:`isinstance`. Since it is not a value-match comparison,
 it is not required.
 
 This default behavior can be modified with :class:`~glom.Required`
@@ -88,12 +88,6 @@ Exceptions
 
 Validation with Check
 ~~~~~~~~~~~~~~~~~~~~~
-
-.. warning::
-
-   Given the suite of tools introduced with :class:`~glom.Match`, the
-   :class:`Check` specifier type may be deprecated in a future
-   release.
 
 .. autoclass:: glom.Check
 

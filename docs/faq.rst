@@ -73,8 +73,8 @@ as examples:
   # is equivalent to
   assign({}, 'a', 'b')
 
-At the time of writing, other convenience functions include :class:`~glom.delete`, 
-:class:`~glom.flatten`, and :class:`~glom.merge`. Note that when performing multiple 
+Other convenience functions include :func:`~glom.delete`, 
+:func:`~glom.flatten`, and :func:`~glom.merge`. Note that when performing multiple 
 glom operations (access, assignment, delete, etc.), it's clearer and more efficient to 
 create a spec and execute it with the :func:`~glom.glom` top-level function.
 
@@ -155,7 +155,7 @@ looking for all keys containing the substring "secret",
 replacing the associated value with "[REDACTED]". 
 The output shape will be the same as the input shape.
 
-At the time of writing (2023), glom isn't designed for this use case.
+glom isn't designed for this use case.
 
 .. _remap: https://boltons.readthedocs.io/en/latest/iterutils.html#nested
 
@@ -173,7 +173,7 @@ in glom history`_:
     def glom(target, spec):
 
         # if the spec is a string or a Path, perform a deep-get on the target
-        if isinstance(spec, (basestring, Path)):
+        if isinstance(spec, (str, Path)):
             return _get_path(target, spec)
 
         # if the spec is callable, call it on the target

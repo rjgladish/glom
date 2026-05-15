@@ -71,6 +71,8 @@ For example, let's raise an error by glomming up some data that doesn't exist:
      - Spec: 'rings'
     glom.core.PathAccessError: could not access 'rings', part 0 of Path('rings'), got error: KeyError('rings')
 
+`Try this example in glompad <https://yak.party/glompad/#spec=%28%22planets%22%2C+%5B%22rings%22%5D%29&target=%7B%22planets%22%3A+%5B%7B%22name%22%3A+%22earth%22%2C+%22moons%22%3A+1%7D%5D%7D&v=1>`__
+
 Let's step through this output:
 
 
@@ -146,6 +148,8 @@ Let's step line by line through a :class:`~glom.Coalesce` error tree:
      |\ Spec: 'yyy'
      |X glom.core.PathAccessError: could not access 'yyy', part 0 of Path('yyy'), got error: KeyError('yyy')
     glom.core.CoalesceError: no valid values found. Tried (('xxx', 'z', 'n'), 'yyy') and got (PathAccessError, PathAccessError) (at path ['xxx', 'z'])
+
+`Try this example in glompad <https://yak.party/glompad/#spec=Coalesce%28%28%22xxx%22%2C+%22z%22%2C+%22n%22%29%2C+%22yyy%22%29&target=%7B%22n%22%3A+%22nope%22%2C+%22xxx%22%3A+%7B%22z%22%3A+%7B%22v%22%3A+0%7D%7D%7D&v=1>`__
 
 * Line **1-10**: Standard fare for glom use and error behavior, see ":ref:`reading-exceptions`"
 * Line **11**: We see a "**+**" when starting a branching spec. Each level of branch adds a "**|**" on the left to help track nesting level.

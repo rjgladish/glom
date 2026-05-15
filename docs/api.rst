@@ -3,6 +3,11 @@ Core ``glom`` API
 
 .. automodule:: glom.core
 
+.. tip::
+
+   Want to try glom interactively? `Open glompad <https://yak.party/glompad/>`__,
+   a browser-based playground for experimenting with glom specs.
+
 .. seealso::
 
    As the glom API grows, we've refactored the docs into separate
@@ -108,10 +113,6 @@ Alternative approach to functions: Call
 An earlier, more primitive approach to callables in glom was the Call
 specifier type.
 
-.. warning::
-
-   Given superiority of its successor, :class:`Invoke`,
-   the :class:`Call` type may be deprecated in a future release.
 
 .. autoclass:: glom.Call
 

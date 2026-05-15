@@ -4,13 +4,12 @@ from xml.etree import ElementTree as ElementTree
 import pytest
 
 from glom import glom, SKIP, STOP, Path, Inspect, Coalesce, CoalesceError, Val, Call, T, S, Invoke, Spec, Ref
-from glom import Auto, Fill, Iter, A, Vars, Val, Literal, GlomError, Pipe
+from glom import Auto, Fill, Iter, A, Vars, Val, GlomError, Pipe
 
 import glom.core as glom_core
 from glom.core import UP, ROOT, bbformat, bbrepr
 from glom.mutation import PathAssignError
 
-from glom import OMIT, Let, Literal  # backwards compat
 
 
 def test_initial_integration():
@@ -102,7 +101,6 @@ def test_coalesce():
 
 
 def test_skip():
-    assert OMIT is SKIP  # backwards compat
 
     target = {'a': {'b': 'c'},  # basic dictionary nesting
               'd': {'e': ['f'],    # list in dictionary
@@ -162,7 +160,6 @@ def test_top_level_default():
 
 
 def test_val():
-    assert Literal is Val
     expected = {'value': 'c',
                 'type': 'a.b'}
     target = {'a': {'b': 'c'}}

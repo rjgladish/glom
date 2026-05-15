@@ -10,7 +10,7 @@
 Real applications have real data, and real data nests. Objects inside
 of objects inside of lists of objects.
 
-glom is a new and powerful way to handle real-world data, featuring:
+glom is a powerful way to handle real-world data, featuring:
 
 * Path-based access for nested data structures
 * Readable, meaningful error messages
@@ -91,17 +91,19 @@ If all this seems interesting, continue exploring glom below:
 * [Original announcement blog post (2018-05-09)][glom_announce]
 * [Frequently Asked Questions][faq]
 * [PyCon 2018 Lightning Talk (2018-05-11)][pycon_talk]
+* [Try glom in your browser (glompad)][glompad]
 
 All of the links above are overflowing with examples, but should you
 find anything about the docs, or glom itself, lacking, [please submit
 an issue][gh_issues]!
 
 [rtd]: https://glom.readthedocs.io
-[cli_rtd]: http://glom.readthedocs.io/en/latest/cli.html
+[cli_rtd]: https://glom.readthedocs.io/en/latest/cli.html
 [tutorial]: https://glom.readthedocs.io/en/latest/tutorial.html
 [faq]: https://glom.readthedocs.io/en/latest/faq.html
 [glom_announce]: https://sedimental.org/glom_restructured_data.html
 [gh_issues]: https://github.com/mahmoud/glom/issues/
 [pycon_talk]: https://www.youtube.com/watch?v=bTAFl8P2DkE&t=18m07s
+[glompad]: https://yak.party/glompad/
 
 In the meantime, just remember: When you've got nested data, glom it! ☄️
