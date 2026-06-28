@@ -741,8 +741,8 @@ class Path:
         except AttributeError:
             step = 1
             start = (i * 2) + 1 if i >= 0 else (i * 2) + len(cur_t_path)
-            if start < 0 or start > len(cur_t_path):
-                raise IndexError('Path index out of range')
+            if start < 0 or start >= len(cur_t_path):
+                raise IndexError('Path index %d out of range for Path of length %d' % (i, (len(cur_t_path) - 1) // 2))
             stop = ((i + 1) * 2) + 1 if i >= 0 else ((i + 1) * 2) + len(cur_t_path)
 
         new_t = TType()

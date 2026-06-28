@@ -42,6 +42,12 @@ setup(name='glom',
       extras_require={
           'toml': ['tomli; python_version<"3.11"'],
           'yaml': ['PyYAML'],
+          'test': [
+              'pytest>=6.2.5',
+              'PyYAML',
+              'tomli; python_version<"3.11"',
+              'coverage',
+          ],
       },
       entry_points={'console_scripts': ['glom = glom.cli:console_main']},
       include_package_data=True,
